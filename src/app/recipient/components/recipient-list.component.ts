@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IRecipient } from 'src/app/models/recipient';
 import { RecipientService } from '../services/recipient.services';
+import { Subscription } from 'rxjs';
+import { Recipient } from '../models/recipient';
 
 @Component({
   templateUrl: './recipient-list.component.html',
@@ -9,8 +10,10 @@ import { RecipientService } from '../services/recipient.services';
 
 export class RecipientListComponent implements OnInit {
   pageTitle: string = 'Recipient list';
-  filteredRecipients : IRecipient[] = [];
-  recipients : IRecipient[] = [];
+  filteredRecipients : Recipient[] = [];
+  recipients : Recipient[] = [];
+  sub!: Subscription;
+  errorMessage: string = '';
 
   private _listFilter: string = '';
   get listFilter(): string {
@@ -25,15 +28,22 @@ export class RecipientListComponent implements OnInit {
 
   constructor(private recipientService : RecipientService) { }
 
-  performFilter(filterBy: string): IRecipient[] {
+  performFilter(filterBy: string): Recipient[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.recipients.filter((recipient: IRecipient) =>
+    return this.recipients.filter((recipient: Recipient) =>
       recipient.name.toLocaleUpperCase().includes(filterBy));
   }
 
   ngOnInit(): void {
-    this.filteredRecipients = this.recipients;
-    //this.recipients = this.recipientService.getAllRecipients();
+    let a = this.recipientService.getAllRecipients();
+    console.log(a);
+     this.sub = this.recipientService.getAllRecipients().subscribe({
+        next: recipients => {
+          this.recipients = recipients;
+          this.filteredRecipients = this.recipients;
+        },
+        error: err => this.errorMessage = err
+      });
   }
 
 }

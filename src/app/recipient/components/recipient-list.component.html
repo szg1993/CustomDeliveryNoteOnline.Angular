@@ -22,7 +22,7 @@
     </div>
     <br />
     <br />
-    <table id="tblData" class="table table-striped row-border" style="width:100%">
+    <table id="tblData" class="table table-striped row-border" style="width:100%" >
         <thead>
             <tr>
                 <th>Code</th>
@@ -35,5 +35,27 @@
                 <th class="text-center">Edit</th>
             </tr>
         </thead>
+        <tbody>
+            <tr *ngFor = 'let recipient of recipients'>             
+                <td>{{recipient}}</td>
+                <td>{{recipient}}</td>
+                <td>{{recipient}}</td>
+                <td>{{recipient}}</td>
+                <td>{{recipient}}</td>
+                <td>{{recipient}}</td>
+                <td>{{recipient}}</td>
+                <td>Ide gomb kell</td>
+            </tr>
+            <!-- <tr *ngFor = 'let recipient of recipients'>             
+                <td>{{recipient.code}}</td>
+                <td>{{recipient.name}}</td>
+                <td>{{recipient.country}}</td>
+                <td>{{recipient.zip}}</td>
+                <td>{{recipient.city}}</td>
+                <td>{{recipient.address}}</td>
+                <td>{{recipient.isOutlander}}</td>
+                <td>Ide gomb kell</td>
+            </tr> -->
+        </tbody>
     </table>
 </div>
