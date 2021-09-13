@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { merge, Observable, throwError } from "rxjs";
 import { catchError, concatAll, map, tap } from 'rxjs/operators';
-import { Recipient } from "../models/recipient";
+import { IRecipient, Recipient } from "../models/recipient";
+import { IRecipientListResponse } from "src/app/shared/response/recipient-list-response";
 
 
 @Injectable({
@@ -26,21 +27,28 @@ export class RecipientService{
       //          catchError(this.handleError)
       //      );
       //  }
-      
 
-      getAllRecipients(): Observable<Recipient[]>{
-        return this.http.get<Recipient[]>(this.recipientUrl)
-        .pipe(
-            map(
-              requestObject => Object.values(requestObject)
-              ),
-            map(requestArray => requestArray.map(r => 
-              { 
-                console.log(r);
-                return r;
-              }))
-        );
-    }
+     getAllRecipients = (): IRecipient[] => {
+       return this.http.get<IRecipientListResponse>(this.recipientUrl)
+         .pipe(x => x);
+     }
+
+
+    //   getAllRecipients(): Observable<Recipient[]>{
+    //     return this.http.get<Recipient[]>(this.recipientUrl)
+    //     .pipe(
+    //       map(
+    //           requestObject => Object.values(requestObject)),
+    //           map(requestArray => requestArray.map(r => { 
+    //             return r;
+    //           }))
+    //     );
+    // }
+
+  //   getAllRecipients() : IRecipient[]{
+  //     const response = await this.http.get(this.recipientUrl).toPromise();
+  //     return response.$values;
+  // }
 
       // getAllRecipients(): Observable<IRecipient[]> 
       // { 
