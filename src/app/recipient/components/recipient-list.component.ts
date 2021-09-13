@@ -34,16 +34,19 @@ export class RecipientListComponent implements OnInit {
       recipient.name.toLocaleUpperCase().includes(filterBy));
   }
 
+  // ngOnInit(): void {
+  //    this.sub = this.recipientService.getAllRecipients().subscribe({
+  //       next: recipients => {
+  //         this.recipients = recipients;
+  //         this.filteredRecipients = this.recipients;
+  //       },
+  //       error: err => this.errorMessage = err
+  //     });
+  // }
+
   ngOnInit(): void {
-    let a = this.recipientService.getAllRecipients();
-    console.log(a);
-     this.sub = this.recipientService.getAllRecipients().subscribe({
-        next: recipients => {
-          this.recipients = recipients;
-          this.filteredRecipients = this.recipients;
-        },
-        error: err => this.errorMessage = err
-      });
-  }
+    const recipientList = await this.recipientService.getAllRecipients();
+    this.recipients = recipientList.$values;
+ }
 
 }
