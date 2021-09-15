@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RecipientService } from '../services/recipient.services';
 import { Subscription } from 'rxjs';
 import { Recipient } from '../models/recipient';
+import { IRecipientListResponse } from 'src/app/shared/response/recipient-list-response';
 
 @Component({
   templateUrl: './recipient-list.component.html',
@@ -12,6 +13,7 @@ export class RecipientListComponent implements OnInit {
   pageTitle: string = 'Recipient list';
   filteredRecipients : Recipient[] = [];
   recipients : Recipient[] = [];
+  recipientResponse: IRecipientListResponse;
   sub!: Subscription;
   errorMessage: string = '';
 
@@ -34,19 +36,15 @@ export class RecipientListComponent implements OnInit {
       recipient.name.toLocaleUpperCase().includes(filterBy));
   }
 
-  // ngOnInit(): void {
-  //    this.sub = this.recipientService.getAllRecipients().subscribe({
-  //       next: recipients => {
-  //         this.recipients = recipients;
-  //         this.filteredRecipients = this.recipients;
-  //       },
-  //       error: err => this.errorMessage = err
-  //     });
-  // }
-
   ngOnInit(): void {
-    const recipientList = await this.recipientService.getAllRecipients();
-    this.recipients = recipientList.$values;
- }
+     this.sub = this.recipientService.getAllRecipients().subscribe({
+        next: response => {
+          //this.recipientResponse = response;
+          this.recipients = response;
+          //this.filteredRecipients = this.recipients;
+        },
+        error: err => this.errorMessage = err
+      });
+  }
 
 }
