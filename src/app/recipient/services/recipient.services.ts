@@ -19,9 +19,7 @@ export class RecipientService{
 
        getAllRecipients(): Observable<IRecipient[]>{
            return this.http.get<IRecipientListResponse>(this.recipientUrl).pipe(
-               map(x => { 
-                   return x.$values;
-                  })
+               map(x => x.$values)
            );
        }
 
