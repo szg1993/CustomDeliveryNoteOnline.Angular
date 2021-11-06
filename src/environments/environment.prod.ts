@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  recipientUrl: "https://localhost:44389/api/v1/recipients/"
 };

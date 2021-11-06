@@ -3,6 +3,7 @@ import { RecipientService } from '../services/recipient.services';
 import { Subscription } from 'rxjs';
 import { Recipient } from '../models/recipient';
 import { IRecipientListResponse } from 'src/app/shared/response/recipient-list-response';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './recipient-list.component.html',
@@ -28,7 +29,7 @@ export class RecipientListComponent implements OnInit {
     this.filteredRecipients = this.performFilter(value);
   }
 
-  constructor(private recipientService : RecipientService) { }
+  constructor(private recipientService : RecipientService, private router: Router) { }
 
   performFilter(filterBy: string): Recipient[] {
     filterBy = filterBy.toLocaleLowerCase();
@@ -39,12 +40,14 @@ export class RecipientListComponent implements OnInit {
   ngOnInit(): void {
      this.sub = this.recipientService.getAllRecipients().subscribe({
         next: response => {
-          //this.recipientResponse = response;
           this.recipients = response;
-          //this.filteredRecipients = this.recipients;
         },
         error: err => this.errorMessage = err
       });
+  }
+
+  goToUpsert():void {
+    this.router.navigate(['/recipientUpsert']);
   }
 
 }

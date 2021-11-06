@@ -5,7 +5,7 @@ import { catchError, concatAll, map, tap } from 'rxjs/operators';
 import { IRecipient, Recipient } from "../models/recipient";
 import { IRecipientListResponse } from "src/app/shared/response/recipient-list-response";
 import { RecipientListComponent } from "../components/recipient-list.component";
-
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -13,12 +13,10 @@ import { RecipientListComponent } from "../components/recipient-list.component";
 
 export class RecipientService{
 
-    private recipientUrl = "https://localhost:44389/api/v1/recipients/";
-
     constructor(private http: HttpClient){}
 
        getAllRecipients(): Observable<IRecipient[]>{
-           return this.http.get<IRecipientListResponse>(this.recipientUrl).pipe(
+           return this.http.get<IRecipientListResponse>(environment.recipientUrl).pipe(
                map(x => x.$values)
            );
        }
