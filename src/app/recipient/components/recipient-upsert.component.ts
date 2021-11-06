@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipient-upsert.component.css']
 })
 export class RecipientUpsertComponent implements OnInit {
-
+  pageTitle: string = 'Create Recipient';
   constructor() { }
 
   ngOnInit(): void {
