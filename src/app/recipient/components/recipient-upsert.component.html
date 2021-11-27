@@ -7,44 +7,63 @@
         <div class="col-12">
             <div class="form-group row">
                 <div class="col-12">
-                    <label for="code">Code</label>
-                    <input name="code" class="form-control" ngModel />         
+                    <label for="code">Code:</label>
+                    <input name="code" required #codeField="ngModel" class="form-control" [(ngModel)]="recipientUpsert.code" /> 
+                    <div [hidden] = "codeField.valid || codeField.untouched" class="mt-1 py-1 alert alert-danger">
+                        Enter a code.
+                    </div>   
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-12">
+                    <label for="name">Name:</label>
+                    <input name="name" required #nameField="ngModel" class="form-control" [(ngModel)]="recipientUpsert.name" /> 
+                    <div [hidden] = "nameField.valid || nameField.untouched" class="mt-1 py-1 alert alert-danger">
+                        Enter a name.
+                    </div> 
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12">
-                    <label for="name"></label>
-                    <input name="name" class="form-control" ngModel/>
+                    <label for="country">Country:</label>
+                    <input name="country" required #countryField="ngModel" class="form-control" [(ngModel)]="recipientUpsert.country" /> 
+                    <div [hidden] = "countryField.valid || countryField.untouched" class="mt-1 py-1 alert alert-danger">
+                        Enter a country.
+                    </div> 
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12">
-                    <label for="country"></label>
-                    <input name="country" class="form-control" ngModel/>
+                    <label for="zip">Zip code:</label>
+                    <input name="zip" required #zipField="ngModel" class="form-control" [(ngModel)]="recipientUpsert.zip" /> 
+                    <div [hidden] = "zipField.valid || zipField.untouched" class="mt-1 py-1 alert alert-danger">
+                        Enter a zip code.
+                    </div> 
+                </div>
+            </div>          
+            <div class="form-group row">
+                <div class="col-12">
+                    <label for="city">City:</label>
+                    <input name="city" required #cityField="ngModel" class="form-control" [(ngModel)]="recipientUpsert.city" /> 
+                    <div [hidden] = "cityField.valid || cityField.untouched" class="mt-1 py-1 alert alert-danger">
+                        Enter a city.
+                    </div> 
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12">
-                    <label for="zip"></label>
-                    <input name="zip" class="form-control" ngModel/>
+                    <label for="address">Address:</label>
+                    <input name="address" required #addressField="ngModel" class="form-control" [(ngModel)]="recipientUpsert.address" /> 
+                    <div [hidden] = "addressField.valid || addressField.untouched" class="mt-1 py-1 alert alert-danger">
+                        Enter an address.
+                    </div> 
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12">
-                    <label for="city"></label>
-                    <input name="city" class="form-control" ngModel />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-12">
-                    <label for="address"></label>
-                    <input name="address" class="form-control" ngModel />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-12">
-                    <label for="isOutlander"></label>
-                    <input for="isOutlander" type="checkbox"  ngModel/>
+                    <label for="isOutlander">Is outlander:</label>
+                    <input for="isOutlander" type="checkbox" required #isOutlanderField="ngModel" [(ngModel)]="recipientUpsert.isOutlander"/>
                 </div>
             </div>
             <div class="form-group row">
@@ -58,4 +77,3 @@
         </div>
     </div>
 </form>
-{{form.value | json}}
